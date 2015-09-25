@@ -6,22 +6,18 @@ var MediaList = React.createClass({
     getFileMedia: function(){
         
         // http://codepen.io/SpencerCooley/pen/JtiFL/
-        // DRAG n DROP: get absolute file urls
         
-        var folderUrl = 'file:///E:/Entertainment/Music/Ellie Goulding/Halcyon Days (Deluxe Edition)/';
-        var playlist = ["01 Don't Say a Word.mp3", "16 In My City.mp3", "21 You My Everything.mp3"];
-        
-        return ();
+        return ("");
     },
     
     render: function(){
         
         return(
-            <div className="media-list">
-                <h3>Media list</h3>
-                <p>Select any mp3 file to list all files</p>
-                <input type="file" name="media"/>
-            </div>
+            React.createElement("div", {className: "media-list"}, 
+                React.createElement("h3", null, "Media list"), 
+                React.createElement("p", null, "Select any mp3 file to list all files"), 
+                React.createElement("input", {type: "file", name: "media"})
+            )
         )
     }
 });
@@ -49,21 +45,20 @@ var MediaPlayer = React.createClass({
         }})
     },
     
-    render: function(){
-        // States: Autoplay, Loop, Paused, Stop, Playlist, HasNextSong, Shuffle
+    render: function(){        
         
         return(
-            <div className="media-player">
-                <h2>Media Player</h2>
+            React.createElement("div", {className: "media-player"}, 
+                React.createElement("h2", null, "Media Player"), 
                 
-                <video width="600" height="360" id="player1" type="video/mp4" controls="controls"
-                    src="file:///C://Users/William/Downloads/Game of Thrones Theme(Rock Cover).mp3" 
-                    poster="assets/img/cover-art.jpg" autoplay>
+                React.createElement("video", {width: "600", height: "360", id: "player1", type: "video/mp4", controls: "controls", 
+                    src: "file:///C://Users/William/Downloads/Game of Thrones Theme(Rock Cover).mp3", 
+                    poster: "assets/img/cover-art.jpg", autoplay: true, loop: true}, 
                     
-                    <button id="pp">Toggle</button>
-                    <span id="time">Time: </span>
-                </video>
-            </div>
+                    React.createElement("button", {id: "pp"}, "Toggle"), 
+                    React.createElement("span", {id: "time"}, "Time: ")
+                )
+            )
         )
     }
 });

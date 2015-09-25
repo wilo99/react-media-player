@@ -3,13 +3,11 @@
 var MediaList = React.createClass({
     displayName: 'MediaList',
     
-    getFileMedia: function(){
+    getFileMedia: function(folderUrl){
         
         // http://codepen.io/SpencerCooley/pen/JtiFL/
         
-        var folderUrl = 'file:///E:/Entertainment/Music/Ellie Goulding/Halcyon Days (Deluxe Edition)/';
-        
-        return ("01 Don't Say a Word.mp3", "16 In My City.mp3", "21 You My Everything.mp3");
+        return ("");
     },
     
     render: function(){

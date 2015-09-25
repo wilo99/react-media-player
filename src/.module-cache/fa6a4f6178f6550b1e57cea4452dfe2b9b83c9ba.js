@@ -3,10 +3,15 @@
 var MediaList = React.createClass({
     displayName: 'MediaList',
     
-    getFileMedia: function(folderUrl){
+    getFileMedia: function(){
         
+        // http://codepen.io/SpencerCooley/pen/JtiFL/
+        // DRAG n DROP: get absolute file urls
         
-        return ("");
+        var folderUrl = 'file:///E:/Entertainment/Music/Ellie Goulding/Halcyon Days (Deluxe Edition)/';
+        var playlist = ["01 Don't Say a Word.mp3", "16 In My City.mp3", "21 You My Everything.mp3"];
+        
+        return ();
     },
     
     render: function(){
@@ -14,6 +19,8 @@ var MediaList = React.createClass({
         return(
             <div className="media-list">
                 <h3>Media list</h3>
+                <p>Select any mp3 file to list all files</p>
+                <input type="file" name="media"/>
             </div>
         )
     }
@@ -42,7 +49,8 @@ var MediaPlayer = React.createClass({
         }})
     },
     
-    render: function(){        
+    render: function(){
+        // States: Autoplay, Loop, Paused, Stop, Playlist, HasNextSong, Shuffle
         
         return(
             <div className="media-player">
@@ -50,7 +58,7 @@ var MediaPlayer = React.createClass({
                 
                 <video width="600" height="360" id="player1" type="video/mp4" controls="controls"
                     src="file:///C://Users/William/Downloads/Game of Thrones Theme(Rock Cover).mp3" 
-                    poster="assets/img/cover-art.jpg" autoplay loop>
+                    poster="assets/img/cover-art.jpg" autoplay>
                     
                     <button id="pp">Toggle</button>
                     <span id="time">Time: </span>

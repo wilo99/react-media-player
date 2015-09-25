@@ -3,13 +3,10 @@
 var MediaList = React.createClass({
     displayName: 'MediaList',
     
-    getFileMedia: function(){
+    getFileMedia: function(folderUrl){
         
-        // http://codepen.io/SpencerCooley/pen/JtiFL/
         
-        var folderUrl = 'file:///E:/Entertainment/Music/Ellie Goulding/Halcyon Days (Deluxe Edition)/';
-        
-        return ("01 Don't Say a Word.mp3", "16 In My City.mp3", "21 You My Everything.mp3");
+        return ("");
     },
     
     render: function(){
@@ -17,8 +14,7 @@ var MediaList = React.createClass({
         return(
             React.createElement("div", {className: "media-list"}, 
                 React.createElement("h3", null, "Media list"), 
-                React.createElement("p", null, "Select any mp3 file to list all files"), 
-                React.createElement("input", {type: "file", name: "media"})
+                React.createElement("p", null, "Select any file to ")
             )
         )
     }
