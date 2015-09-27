@@ -50,8 +50,22 @@ var MediaItem = React.createClass({displayName: 'MediaItem',
 });
 
 var MediaList = React.createClass({displayName: 'MediaList',
+
+    activateDropZone: function(){
+        
+        
+
+        $('#myFile').bind('change', function(){
+            
+            //this.files[0].size gets the size of your file.
+            alert(this.files[0].size);
+
+        });
+    },
     
     getFileMedia: function(){
+        
+        this.activateDropZone();
         
         // http://codepen.io/SpencerCooley/pen/JtiFL/
         // DRAG n DROP: get absolute file urls, saves the list to local storage
@@ -70,7 +84,12 @@ var MediaList = React.createClass({displayName: 'MediaList',
         return(
             React.createElement("div", {className: "media-list"}, 
                 React.createElement("h3", null, "Media list"), 
-                React.createElement("p", null, "Click to play any file"), 
+                
+                React.createElement("div", {className: "media-dropzone"}, 
+                    React.createElement("p", null, "Drop media here")
+                ), 
+                
+                React.createElement("input", {type: "file", id: "myFile"}), 
                 
                 React.createElement("ul", {className: "media-list"}, 
                     
@@ -99,7 +118,7 @@ var MediaPlayer = React.createClass({displayName: 'MediaPlayer',
             React.createElement("div", {className: "media-player"}, 
                 React.createElement("h2", null, "Media Player"), 
                 
-                React.createElement("video", {width: "600", height: "360", id: "player1", type: "video/mp4", controls: "controls", 
+                React.createElement("video", {height: "360", id: "player1", type: "video/mp4", controls: "controls", 
                     src: "file:///E:/Experiments/MediaPlayer/media/16 In My City.mp3", 
                     poster: "assets/img/cover-art.jpg", autoplay: true}, 
                     

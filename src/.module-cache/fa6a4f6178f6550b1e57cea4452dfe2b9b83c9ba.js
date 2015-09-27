@@ -50,8 +50,22 @@ var MediaItem = React.createClass({displayName: 'MediaItem',
 });
 
 var MediaList = React.createClass({displayName: 'MediaList',
+
+    activateDropZone: function(){
+        
+        
+
+        $('#myFile').bind('change', function(){
+            
+            //this.files[0].size gets the size of your file.
+            alert(this.files[0].size);
+
+        });
+    },
     
     getFileMedia: function(){
+        
+        this.activateDropZone();
         
         // http://codepen.io/SpencerCooley/pen/JtiFL/
         // DRAG n DROP: get absolute file urls, saves the list to local storage
@@ -70,7 +84,12 @@ var MediaList = React.createClass({displayName: 'MediaList',
         return(
             <div className="media-list">
                 <h3>Media list</h3>
-                <p>Click to play any file</p>
+                
+                <div className="media-dropzone">
+                    <p>Drop media here</p>
+                </div>
+                
+                <input type="file" id="myFile" />
                 
                 <ul className="media-list">
                     
@@ -99,7 +118,7 @@ var MediaPlayer = React.createClass({displayName: 'MediaPlayer',
             <div className="media-player">
                 <h2>Media Player</h2>
                 
-                <video width="600" height="360" id="player1" type="video/mp4" controls="controls"
+                <video height="360" id="player1" type="video/mp4" controls="controls"
                     src="file:///E:/Experiments/MediaPlayer/media/16 In My City.mp3" 
                     poster="assets/img/cover-art.jpg" autoplay>
                     

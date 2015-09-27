@@ -16,6 +16,7 @@ React Media Player
 - React: http://facebook.github.io/react/index.html
 - Media Element JS: http://mediaelementjs.com/#api
 - File API: http://mailru.github.io/FileAPI/
+- Material Design Lite: http://www.getmdl.io/
 
 ###Coming Soon
 
