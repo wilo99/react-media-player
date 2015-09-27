@@ -1,33 +1,10 @@
 /** @jsx React.DOM */
 
-var MediaList = React.createClass({
-    displayName: 'MediaList',
+var MediaItem = React.createClass({displayName: 'MediaItem',
     
-    getFileMedia: function(){
-        
-        // http://codepen.io/SpencerCooley/pen/JtiFL/
-        // DRAG n DROP: get absolute file urls
-        
-        var folderUrl = 'file:///E:/Entertainment/Music/Ellie Goulding/Halcyon Days (Deluxe Edition)/';
-        var playlist = ["01 Don't Say a Word.mp3", "16 In My City.mp3", "21 You My Everything.mp3"];
-        
-        return ();
+    getInitialState: function(){
+        return { activeIndex: 0, activeMedia: '' };
     },
-    
-    render: function(){
-        
-        return(
-            <div className="media-list">
-                <h3>Media list</h3>
-                <p>Select any mp3 file to list all files</p>
-                <input type="file" name="media"/>
-            </div>
-        )
-    }
-});
-
-var MediaPlayer = React.createClass({
-    displayName: 'MediaPlayer',
     
     loadMediaPlayer: function(){
         
@@ -48,6 +25,72 @@ var MediaPlayer = React.createClass({
             };
         }})
     },
+
+    // Update media state
+    setActiveIndex: function(e){
+        this.setState({ activeIndex: this.props.mediaIndex,
+                        activeMedia: this.props.media });
+        document.getElementById("player1").src = this.props.media;
+        
+        console.log('Now playing: ' + this.props.activeMedia);
+        this.loadMediaPlayer();
+        
+        e.preventDefault();
+    },
+    
+    render: function(){
+        
+        return (
+            <li className="media-item">
+                <a href="#" onClick={ this.setActiveIndex } className={ this.state.activeIndex } data-media-index={ this.props.mediaIndex } data-media-url={ this.props.media }> { this.props.media } </a>
+            </li>
+        );
+    }
+
+});
+
+var MediaList = React.createClass({displayName: 'MediaList',
+    
+    getFileMedia: function(){
+        
+        // http://codepen.io/SpencerCooley/pen/JtiFL/
+        // DRAG n DROP: get absolute file urls, saves the list to local storage
+        var folderURL = 'file:///E:/Experiments/MediaPlayer/media/';
+        var playlist = ["01 Don't Say a Word.mp3", "16 In My City.mp3", "21 You My Everything.mp3"];
+        var getFullURL = function(media){
+            return folderURL + media;
+        }
+        
+        return playlist.map(getFullURL, playlist);
+    },
+    
+    render: function(){
+        var mediaList = this.getFileMedia();
+        
+        return(
+            <div className="media-list">
+                <h3>Media list</h3>
+                <p>Click to play any file</p>
+                
+                <ul className="media-list">
+                    
+                    { mediaList.map(function(media, index){
+                        
+                        return <MediaItem media={ media } mediaIndex={ index } />
+                        
+                    }) }
+                    
+                </ul>
+            </div>
+        )
+    }
+});
+
+var MediaPlayer = React.createClass({displayName: 'MediaPlayer',
+    
+    getInitialState: function(){
+        return { play: false, loop: false, shuffle: false };
+    },
     
     render: function(){
         // States: Autoplay, Loop, Paused, Stop, Playlist, HasNextSong, Shuffle
@@ -57,12 +100,14 @@ var MediaPlayer = React.createClass({
                 <h2>Media Player</h2>
                 
                 <video width="600" height="360" id="player1" type="video/mp4" controls="controls"
-                    src="file:///C://Users/William/Downloads/Game of Thrones Theme(Rock Cover).mp3" 
+                    src="file:///E:/Experiments/MediaPlayer/media/16 In My City.mp3" 
                     poster="assets/img/cover-art.jpg" autoplay>
                     
                     <button id="pp">Toggle</button>
                     <span id="time">Time: </span>
                 </video>
+                
+                <MediaList activeIndex="2"/>
             </div>
         )
     }
